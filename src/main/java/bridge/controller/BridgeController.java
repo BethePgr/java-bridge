@@ -11,6 +11,7 @@ public class BridgeController {
     OutputView outputView = new OutputView();
     BridgeGameService bridgeGameService = new BridgeGameService();
     List<List<String>> progress = bridgeGameService.initGameProgress();
+    String str="R";
 
    public void run() {
        int size = inputView.inputSize();
@@ -18,7 +19,7 @@ public class BridgeController {
        BridgeGame bridgeGame = new BridgeGame(bridge);
        repeatMoving(size,bridgeGame);
        while(!checkX(progress)){
-           String str = inputView.readGameCommand();
+           str = inputView.readGameCommand();
            if(str.equals("R")){
                progress = bridgeGameService.initGameProgress();
                repeatMoving(size,bridgeGame);
@@ -27,7 +28,9 @@ public class BridgeController {
                break;
            }
        }
+        outputView.printResult(progress,str,bridgeGameService);
    }
+
 
    private List<List<String>> repeatMoving(int size,BridgeGame bridgeGame){
        while (checkXAndSize(size, progress)) {
