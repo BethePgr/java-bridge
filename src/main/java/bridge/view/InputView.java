@@ -9,7 +9,8 @@ public class InputView {
     private static String START_MESSAGE = "다리 건너기 게임을 시작합니다.";
     private static String INPUT_BRIDGE_LENGTH = "다리의 길이를 입력해주세요.";
     private static String INPUT_ERROR_MESSAGE = "[ERROR] 3과 20사이의 숫자를 입력해주세요.";
-
+    private static String MOVE_MESSAGE = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
+    private static String MOVE_ERROR = "[ERROR] U 혹은 D만 입력 가능합니다.";
     /**
      * 다리의 길이를 입력받는다.
      */
@@ -27,7 +28,7 @@ public class InputView {
                 return;
             }
         }
-        throw new IllegalArgumentException("[ERROR] 3과 20사이의 숫자만 입력해주세요.");
+        throw new IllegalArgumentException(INPUT_ERROR_MESSAGE);
     }
 
     private boolean between3And20(String input){
@@ -51,7 +52,17 @@ public class InputView {
      * 사용자가 이동할 칸을 입력받는다.
      */
     public String readMoving() {
-        return null;
+        System.out.println(MOVE_MESSAGE);
+        String input = Console.readLine();
+        validateInputMove(input);
+        return input;
+    }
+
+    private void validateInputMove(String input) {
+        if(input.equals("U") || input.equals("D")){
+            return;
+        }
+        throw new IllegalArgumentException(MOVE_ERROR);
     }
 
     /**

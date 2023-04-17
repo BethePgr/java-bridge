@@ -16,4 +16,14 @@ public class InputController {
         }
     }
 
+    public String readMoving(){
+        try{
+            String bridgeSize = inputView.readMoving();
+            return bridgeSize;
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return readMoving();
+        }
+    }
+
 }
