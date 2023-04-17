@@ -19,6 +19,11 @@ public class OutputView {
         System.out.println(stringList(move.get(1)));
     }
 
+    public void printMapNoInput(List<List<String>> gameProgress) {
+        System.out.println(stringList(gameProgress.get(0)));
+        System.out.println(stringList(gameProgress.get(1)));
+    }
+
     private String stringList(List<String> list){
         StringBuilder str = new StringBuilder("[");
         for(String x : list){

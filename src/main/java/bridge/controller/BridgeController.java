@@ -19,10 +19,15 @@ public class BridgeController {
         List<String> bridge = bridgeGameService.initBridge(size);
         BridgeGame bridgeGame = new BridgeGame(bridge);
         List<List<String>> gameProgress = bridgeGameService.initGameProgress();
-        while(checkX(gameProgress)){
+        while(checkX(gameProgress) && gameProgress.get(0).size() <bridge.size()){
             String input = inputView.readMoving();
             outputView.printMap(bridgeGame,input,gameProgress);
         }
+        if(!checkX(gameProgress)){
+            String input = inputView.readGameCommand();
+        }
+        System.out.println("최종 게임 결과");
+        outputView.printMapNoInput(gameProgress);
     }
 
     private boolean checkX(List<List<String>> gameProgress){

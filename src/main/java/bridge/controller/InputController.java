@@ -18,12 +18,21 @@ public class InputController {
 
     public String readMoving(){
         try{
-            String bridgeSize = inputView.readMoving();
-            return bridgeSize;
+            String move = inputView.readMoving();
+            return move;
         }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
             return readMoving();
         }
     }
 
+    public String readGameCommand(){
+        try{
+            String restart = inputView.readGameCommand();
+            return restart;
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return readGameCommand();
+        }
+    }
 }
