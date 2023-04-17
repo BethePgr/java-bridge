@@ -4,12 +4,14 @@ import bridge.BridgeGame;
 import bridge.BridgeMaker;
 import bridge.service.BridgeGameService;
 import bridge.view.InputView;
+import bridge.view.OutputView;
 import java.util.Arrays;
 import java.util.List;
 
 public class BridgeController {
 
     InputController inputView = new InputController();
+    OutputView outputView = new OutputView();
     BridgeGameService bridgeGameService = new BridgeGameService();
 
     public void run(){
@@ -19,10 +21,7 @@ public class BridgeController {
         List<List<String>> gameProgress = bridgeGameService.initGameProgress();
         while(checkX(gameProgress)){
             String input = inputView.readMoving();
-            List<List<String>> move = bridgeGame.move(input, gameProgress);
-            System.out.println(stringList(move.get(0)));
-            System.out.println(stringList(move.get(1)));
-
+            outputView.printMap(bridgeGame,input,gameProgress);
         }
     }
 
@@ -32,12 +31,5 @@ public class BridgeController {
         return flag1 && flag2;
     }
 
-    private String stringList(List<String> list){
-        StringBuilder str = new StringBuilder("[");
-        for(String x : list){
-            str.append(x).append("|");
-        }
-        str.deleteCharAt(str.length()-1);
-        return str.append("]").toString();
-    }
+
 }
