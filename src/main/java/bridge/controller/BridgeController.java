@@ -40,11 +40,11 @@ public class BridgeController {
    }
 
     private boolean checkCommand(int size, BridgeGame bridgeGame) {
-        if (command.equals("R")){
+        if (bridgeGame.retry(command)){
             progress = bridgeGameService.initGameProgress();
             repeatMoving(size, bridgeGame);
         }
-        if(command.equals("Q")){
+        if(!bridgeGame.retry(command)){
             return true;
         }
         return false;
