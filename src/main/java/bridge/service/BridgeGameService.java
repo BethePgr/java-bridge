@@ -10,6 +10,7 @@ public class BridgeGameService {
 
     private final BridgeMaker bridgeMaker;
     private int count = 0;
+
     public BridgeGameService() {
         bridgeMaker = new BridgeMaker(new BridgeRandomNumberGenerator());
     }
@@ -26,12 +27,13 @@ public class BridgeGameService {
         return gameProgress;
     }
 
-    public List<List<String>> moveService(String input, List<List<String>> gameProgress, BridgeGame bridgeGame) {
+    public List<List<String>> moveService(String input, List<List<String>> gameProgress,
+        BridgeGame bridgeGame) {
         bridgeGame.move(input, gameProgress);
         return gameProgress;
     }
 
-    public int getCount(){
+    public int getCount() {
         return count;
     }
 }

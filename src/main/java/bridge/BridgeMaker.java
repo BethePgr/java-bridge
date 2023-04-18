@@ -21,7 +21,7 @@ public class BridgeMaker {
      */
     public List<String> makeBridge(int size) {
         List<String> bridge = new ArrayList<>();
-        for(int i = 0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             int blockNum = bridgeNumberGenerator.generate();
             bridge.add(createBridge(blockNum));
         }
@@ -29,7 +29,7 @@ public class BridgeMaker {
     }
 
     private String createBridge(int blockNum) {
-        if(blockNum == 1){
+        if (blockNum == 1) {
             return "U";
         }
         return "D";

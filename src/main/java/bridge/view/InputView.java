@@ -11,6 +11,7 @@ public class InputView {
     private static String INPUT_ERROR_MESSAGE = "[ERROR] 3과 20사이의 숫자를 입력해주세요.";
     private static String MOVE_MESSAGE = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
     private static String MOVE_ERROR = "[ERROR] U 혹은 D만 입력 가능합니다.";
+
     /**
      * 다리의 길이를 입력받는다.
      */
@@ -22,32 +23,33 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    private void checkBridgeSize(String input){
-        if(validateNumber(input)){
-            if(between3And20(input)){
+    private void checkBridgeSize(String input) {
+        if (validateNumber(input)) {
+            if (between3And20(input)) {
                 return;
             }
         }
         throw new IllegalArgumentException(INPUT_ERROR_MESSAGE);
     }
 
-    private boolean between3And20(String input){
+    private boolean between3And20(String input) {
         boolean flag = false;
         int num = Integer.parseInt(input);
-        if(num>=3 && num<=20){
+        if (num >= 3 && num <= 20) {
             flag = true;
         }
         return flag;
     }
 
-    private boolean validateNumber(String input){
-        for(char x : input.toCharArray()){
-            if(!Character.isDigit(x)){
+    private boolean validateNumber(String input) {
+        for (char x : input.toCharArray()) {
+            if (!Character.isDigit(x)) {
                 return false;
             }
         }
         return true;
     }
+
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
@@ -59,7 +61,7 @@ public class InputView {
     }
 
     private void validateInputMove(String input) {
-        if(input.equals("U") || input.equals("D")){
+        if (input.equals("U") || input.equals("D")) {
             return;
         }
         throw new IllegalArgumentException(MOVE_ERROR);
@@ -76,7 +78,7 @@ public class InputView {
     }
 
     private void validateInputRestart(String input) {
-        if(input.equals("R") || input.equals("Q")){
+        if (input.equals("R") || input.equals("Q")) {
             return;
         }
         throw new IllegalArgumentException("재시작인 R이나 종료의 Q만 입력 가능합니다.");

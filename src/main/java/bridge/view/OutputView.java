@@ -15,7 +15,7 @@ public class OutputView {
      * <p>
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public void printMap(BridgeGame bridgeGame,String input,List<List<String>> gameProgress) {
+    public void printMap(BridgeGame bridgeGame, String input, List<List<String>> gameProgress) {
         List<List<String>> move = bridgeGame.move(input, gameProgress);
         System.out.println(stringList(move.get(0)));
         System.out.println(stringList(move.get(1)));
@@ -26,20 +26,22 @@ public class OutputView {
         System.out.println(stringList(gameProgress.get(1)));
     }
 
-    private String stringList(List<String> list){
+    private String stringList(List<String> list) {
         StringBuilder str = new StringBuilder("[");
-        for(String x : list){
+        for (String x : list) {
             str.append(x).append("|");
         }
-        str.deleteCharAt(str.length()-1);
+        str.deleteCharAt(str.length() - 1);
         return str.append("]").toString();
     }
+
     /**
      * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
      * <p>
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public void printResult(List<List<String>> gameProgress,String str, BridgeGameService service) {
+    public void printResult(List<List<String>> gameProgress, String str,
+        BridgeGameService service) {
         System.out.println();
         System.out.println("최종 게임 결과");
         printMapNoInput(gameProgress);
@@ -48,8 +50,8 @@ public class OutputView {
         System.out.println("총 시도한 횟수: " + service.getCount());
     }
 
-    private String answerResult(String str){
-        if(!str.equals("R")){
+    private String answerResult(String str) {
+        if (!str.equals("R")) {
             return "실패";
         }
         return "성공";
