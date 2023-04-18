@@ -7,32 +7,50 @@ import java.util.List;
 
 public class BridgeController {
 
-    InputController inputView = new InputController();
-    OutputView outputView = new OutputView();
-    BridgeGameService bridgeGameService = new BridgeGameService();
-    List<List<String>> progress = bridgeGameService.initGameProgress();
-    String str="R";
+    private final InputController inputView;
+    private final OutputView outputView;
+    private final BridgeGameService bridgeGameService;
+    private List<List<String>> progress;
+    private String command;
+
+    public BridgeController(){
+        inputView = new InputController();
+        outputView = new OutputView();
+        bridgeGameService = new BridgeGameService();
+        progress = bridgeGameService.initGameProgress();
+        command = "R";
+    }
 
    public void run() {
        int size = inputView.inputSize();
        List<String> bridge = bridgeGameService.initBridge(size);
        BridgeGame bridgeGame = new BridgeGame(bridge);
        repeatMoving(size,bridgeGame);
+       repeatCommandAndMoving(size,bridgeGame);
+       outputView.printResult(progress,command,bridgeGameService);
+   }
+
+   private void repeatCommandAndMoving(int size, BridgeGame bridgeGame){
        while(!checkX(progress)){
-           str = inputView.readGameCommand();
-           if(str.equals("R")){
-               progress = bridgeGameService.initGameProgress();
-               repeatMoving(size,bridgeGame);
-           }
-           if(str.equals("Q")){
+           command = inputView.readGameCommand();
+           if (checkCommand(size, bridgeGame)) {
                break;
            }
        }
-        outputView.printResult(progress,str,bridgeGameService);
    }
 
+    private boolean checkCommand(int size, BridgeGame bridgeGame) {
+        if (command.equals("R")){
+            progress = bridgeGameService.initGameProgress();
+            repeatMoving(size, bridgeGame);
+        }
+        if(command.equals("Q")){
+            return true;
+        }
+        return false;
+    }
 
-   private List<List<String>> repeatMoving(int size,BridgeGame bridgeGame){
+    private List<List<String>> repeatMoving(int size,BridgeGame bridgeGame){
        while (checkXAndSize(size, progress)) {
            String input = inputView.readMoving();
            outputView.printMap(bridgeGame, input, progress);
@@ -44,7 +62,6 @@ public class BridgeController {
        return checkX(progress) && progress.get(0).size()<size;
    }
 
-    //x가 하나도 없을시에만 true
     private boolean checkX(List<List<String>> gameProgress){
         boolean flag1 = gameProgress.get(0).stream().allMatch(str -> !str.contains("X"));
         boolean flag2 = gameProgress.get(1).stream().allMatch(str -> !str.contains("X"));
